@@ -1,0 +1,37 @@
+create table animals(
+animal_id int primary key,
+animal_name varchar(50),
+species varchar(50),
+habitat_id int
+);
+
+create table habitats(
+habitat_id int primary key,
+habitat_name varchar(50),
+climate varchar(50)
+);
+
+insert into animals (animal_id, animal_name, species, habitat_id) values
+(1, 'Monkey', 'Mammal', 1),
+(2, 'Cow', 'Mammal', 1),
+(3, 'Lion', 'Mammal', 1),
+(4, 'aa', 'Fish', 2),
+(5, 'bb', 'fish', 2),
+(6, 'ccc', 'Mammal', 3),
+(7, 'dd', 'Mammal', 4);
+
+
+insert into habitats (habitat_id, habitat_name, climate) values
+(1, 'Forist', 'Temperate'),
+(2, 'River', 'Temperate'),
+(3, 'Ocean', 'Marine'),
+(4, 'City and Villages', 'Domistic')
+
+select a.habitat_id,
+	a.habitat_name,
+	a.climate,
+	count(b.animal_id) as total_animals
+	from habitats a
+	join animals b on a.habitat_id = b.habitat_id group by a.habitat_id, a.habitat_name, a.climate;
+
+
